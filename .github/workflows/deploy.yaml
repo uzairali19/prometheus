@@ -50,9 +50,9 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.5.7
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "prometheus"
+          heroku_app_name: "prometheus123456789"
           heroku_email: "uzairali19b@gmail.com"
-          healthcheck: "https://prometheus.herokuapp.com/"
+          healthcheck: "https://prometheus123456789.herokuapp.com/"
           checkstring: "status 200"
           usedocker: false
           appdir: "backend"
