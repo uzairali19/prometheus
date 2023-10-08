@@ -1,49 +1,33 @@
 import axios, { AxiosError } from 'axios';
 
-const port = process.env.PORT || 9000;
-const BASE_URL: string = `http://localhost:${port}`;
+const PORT = process.env.PORT || 9000;
+const BASE_URL = process.env.PUBLIC_URL ||`http://localhost:${PORT}`;
+const COMMON_HEADERS = {
+    'Content-Type': 'application/json',
+    'Authorization': 'mysecrettoken'
+};
 
 interface TimeResponse {
     epoch: number;
 }
 
 interface MetricsResponse {
-    data: any;  // Adjust with the expected shape of your data
+    data: any;
 }
 
-
-const fetchTime = async (): Promise<TimeResponse> => {
+const sendRequest = async <T>(endpoint: string): Promise<T> => {
     try {
-        const response = await axios.get<TimeResponse>(`${BASE_URL}/time`,{
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'mysecrettoken'
-            }
+        const response = await axios.get<T>(`${BASE_URL}${endpoint}`, {
+            headers: COMMON_HEADERS
         });
         return response.data;
-    } catch (error) {
-        console.error("There was an error fetching the time:", error);
+    } catch (error:any) {
+        console.error(`There was an error fetching from ${endpoint}:`, error);
         throw error as AxiosError;
     }
 };
 
-const fetchMetrics = async (): Promise<MetricsResponse> => {
-    try {
-        const response = await axios.get<MetricsResponse>(`${BASE_URL}/metrics`,{
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'mysecrettoken'
-            }
-        });
-        return response.data;
-    } catch (error) {
-        console.error("There was an error fetching the metrics:", error);
-        throw error as AxiosError;
-    }
-};
+const fetchTime = () => sendRequest<TimeResponse>('/time');
+const fetchMetrics = () => sendRequest<MetricsResponse>('/metrics');
 
-
-
-
-
-export {fetchTime, fetchMetrics};
+export { fetchTime, fetchMetrics };

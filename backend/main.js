@@ -1,13 +1,13 @@
 const express = require('express');
 const promMid = require('express-prometheus-middleware');
 const AJV = require('ajv');
-const app = express();
-const port = 9000;
 const cors = require('cors');
 
-app.use(cors());
-
+const app = express();
+const port = 9000;
 const ajv = new AJV();
+
+// Schemas
 const timeSchema = {
     type: "object",
     properties: {
@@ -19,20 +19,22 @@ const timeSchema = {
     required: ["epoch"]
 };
 
-app.use((req, res, next) => {
+// Middlewares
+const authMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader !== 'mysecrettoken') {
         return res.status(403).send('Forbidden');
     }
     next();
-});
+};
 
-app.use(promMid({
+const prometheusMiddleware = promMid({
     metricsPath: '/metrics',
     collectDefaultMetrics: true,
-}));
+});
 
-app.get('/time', (req, res) => {
+// Routes
+const getTimeRoute = (req, res) => {
     const responseData = {
         epoch: Math.floor(Date.now() / 1000)
     };
@@ -44,8 +46,15 @@ app.get('/time', (req, res) => {
     }
 
     res.json(responseData);
-});
+};
 
+// Setup app
+app.use(cors());
+app.use(authMiddleware);
+app.use(prometheusMiddleware);
+app.get('/time', getTimeRoute);
+
+// Start server
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });

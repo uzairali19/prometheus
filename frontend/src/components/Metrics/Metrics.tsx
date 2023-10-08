@@ -7,29 +7,26 @@ const Metrics: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
+    const getMetrics = async () => {
+        try {
+            const response = await fetchMetrics();
+            setData(response);
+            setError(null);
+        } catch (err) {
+            setError("Failed to fetch metrics");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const getMetrics = async () => {
-            try {
-                const response = await fetchMetrics();
-
-                setData(response);
-                setLoading(false);
-            } catch (err) {
-                setError("Failed to fetch metrics");
-                setLoading(false);
-            }
-        };
-
         getMetrics();
+        const intervalId = setInterval(getMetrics, 30000);
+        return () => clearInterval(intervalId);
     }, []);
 
-    if (loading) {
-        return <Loading />;
-    }
-
-    if (error) {
-        return <p className="text-red-500 mt-2">{error}</p>;
-    }
+    if (loading) return <Loading />;
+    if (error) return <p className="text-red-500 mt-2">{error}</p>;
 
     return (
         <div className="p-4 border rounded">

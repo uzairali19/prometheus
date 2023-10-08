@@ -4,10 +4,9 @@ import {RightSide} from "../RightSide";
 
 const Layout: React.FC = () => {
     const currentYear:number = new Date().getFullYear();
-
     return (
         <div className="flex flex-col h-screen bg-gray-200">
-            <header className="bg-gray-700 p-4 text-white text-center"> {/* Here, I'm giving a dark background and white text as an example */}
+            <header className="bg-gray-700 p-4 text-white text-center">
                 <h1>UZAIR ALI</h1>
             </header>
 
@@ -18,7 +17,6 @@ const Layout: React.FC = () => {
             <footer className="app-footer bg-gray-800 text-white p-4 text-center">
                 © {currentYear} Prometheus. All rights reserved.
             </footer>
-
         </div>
     );
 }
