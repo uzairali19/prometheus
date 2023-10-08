@@ -1,12 +1,16 @@
 import React from 'react';
 import {Stopwatch} from "../StopWatch";
 
-const LeftSide:React.FC = () => {
+interface LeftSideProps {
+    className?: string;
+}
+const LeftSide: React.FC<LeftSideProps> = ({ className }) => {
     return (
-        <div className="leftside">
+        <div className={className}>
             <Stopwatch />
         </div>
     );
-}
+};
+
 
 export default LeftSide;

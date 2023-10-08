@@ -3,7 +3,9 @@ const promMid = require('express-prometheus-middleware');
 const AJV = require('ajv');
 const app = express();
 const port = 9000;
+const cors = require('cors');
 
+app.use(cors());
 
 const ajv = new AJV();
 const timeSchema = {

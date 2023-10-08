@@ -1,11 +1,14 @@
 import React from "react";
+import { Metrics } from "../Metrics";
 
-const RightSide: React.FC = () => {
+interface RightSideProps {
+    className?: string;
+}
+
+const RightSide: React.FC<RightSideProps> = ({ className }) => {
     return (
-        <div className="app">
-            <header className="app-header"></header>
-            <main className="app-main"></main>
-            <footer className="app-footer"></footer>
+        <div className={`flex flex-col items-start justify-start w-1/2 p-4 ${className}`}>
+            <Metrics />
         </div>
     );
 }

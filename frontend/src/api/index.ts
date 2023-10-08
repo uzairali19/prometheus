@@ -1,1 +1,1 @@
-export { fetchTime } from './Time';
+export { fetchTime, fetchMetrics } from './Time';
