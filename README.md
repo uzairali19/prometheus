@@ -1,6 +1,6 @@
-# React Rails
+# Prometheus
 
-> This project serves as a bridge between a frontend `React` application and a backend `Express.js` server. The backend provides an authenticated endpoint to retrieve the current server time in epoch seconds, which the frontend then displays. Additionally, it integrates Prometheus for server metrics and uses `AJV` for server response schema validation.
+> This project serves as a bridge between a frontend `React` application and a backend `Express.js` server. The backend provides an authenticated endpoint to retrieve the current server time in epoch seconds, which the frontend then displays. Additionally, it integrates Prometheus for server metrics and uses `AJV` for server response schema validation. I have also added a yaml workflow to run deployments but I need to get paid accounts to make those apis work live when deployed.
 
 ## Live Demo
 
