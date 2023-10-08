@@ -23,6 +23,7 @@ const sendRequest = async <T>(endpoint: string): Promise<T> => {
         return response.data;
     } catch (error:any) {
         console.error(`There was an error fetching from ${endpoint}:`, error);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         throw error as AxiosError;
     }
 };
