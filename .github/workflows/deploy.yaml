@@ -28,7 +28,7 @@ jobs:
         uses: netlify/actions/cli@master
         with:
           args: deploy --prod
-          secrets: '["NETLIFY_AUTH_TOKEN"]'
+          secrets: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           dir: 'frontend/build'
 
   deploy-backend:
