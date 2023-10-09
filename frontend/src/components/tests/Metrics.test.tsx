@@ -3,7 +3,6 @@ import { render, screen, waitFor, act } from '@testing-library/react';
 import { Metrics } from '../Metrics';
 import { fetchMetrics } from '../../api';
 
-// Mocking the fetchMetrics function
 jest.mock('../../api');
 
 describe('<Metrics />', () => {
