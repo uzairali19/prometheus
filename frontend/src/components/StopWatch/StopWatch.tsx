@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { fetchTime } from '../../api';
 import AnimatedServerTime from './AnimatedServerTime';
+import moment from 'moment';  // Import moment
 
 const Stopwatch: React.FC = () => {
     const [serverTime, setServerTime] = useState<number | null>(null);
@@ -9,15 +10,7 @@ const Stopwatch: React.FC = () => {
 
     // Utility function to format time
     const formatTime = (secondsInput: number): string => {
-        let totalSeconds = Math.round(secondsInput);
-
-        const hrs = Math.floor(totalSeconds / 3600);
-        totalSeconds %= 3600;
-
-        const mins = Math.floor(totalSeconds / 60);
-        const secs = totalSeconds % 60;
-
-        return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        return moment.utc(secondsInput * 1000).format('HH:mm:ss');
     };
 
     // Function to fetch the server time

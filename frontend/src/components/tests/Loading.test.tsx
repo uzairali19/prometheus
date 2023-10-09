@@ -17,11 +17,11 @@ describe('LoadingComponent', () => {
         const { getByRole } = render(<Loading />);
         const progressElement = getByRole('progressbar') as HTMLElement;
 
-        // Check color. This assumes that the color leads to a certain class or style. Adjust if necessary.
-        expect(progressElement).toHaveClass('MuiCircularProgress-root'); // Assuming MUI uses this class for 'success' color
+        
+        expect(progressElement).toHaveClass('MuiCircularProgress-root');
 
-        // Check size. This assumes that size leads to a certain style. Adjust if necessary.
-        expect(progressElement.style.width).toBe('300px');  // Assuming MUI applies size as width in pixels
-        expect(progressElement.style.height).toBe('300px'); // Adjust based on actual implementation
+        
+        expect(progressElement.style.width).toBe('300px');
+        expect(progressElement.style.height).toBe('300px');
     });
 });
