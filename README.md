@@ -10,6 +10,10 @@
 
 ![Prometheus-Demo](./demo.gif)
 
+## Tests
+
+![Tests](./tests.png)
+
 ## Built With
 
 - React
